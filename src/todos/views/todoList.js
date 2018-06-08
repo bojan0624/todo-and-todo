@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { List } from 'antd'
 import TodoItem from './todoItem'
-import { FilterType } from '../../constants'
 import { toggleTodo, removeTodo } from '../actions'
+import { selectVisibleTodos } from '../selector'
 
 const TodoList = ({todos, onToggleTodo, onRemoveTodo}) => {
     return (
@@ -24,22 +24,9 @@ const TodoList = ({todos, onToggleTodo, onRemoveTodo}) => {
     )
 }
 
-const selectVisibleTodos = (todos, filter) => {
-  switch (filter) {
-    case FilterType.ALL:
-      return todos
-    case FilterType.COMPLETED:
-      return todos.filter(v => v.completed)
-    case FilterType.UNCOMPLETED:
-      return todos.filter(v => !v.completed)
-    default:
-      throw new Error('unsupported filter')
-  }
-}
-
 const mapStateToProps = state => {
   return {
-    todos: selectVisibleTodos(state.todos, state.filter)
+    todos: selectVisibleTodos(state)
   }
 }
 
