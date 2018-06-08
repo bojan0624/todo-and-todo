@@ -11,19 +11,19 @@ const RadioButton = Radio.Button
 class filters extends PureComponent {
   handleSelect = e => {
     const value = e.target.value
-    this.props.onFilter(FilterType[value])
+    this.props.onFilter(value)
   }
 
   render() {
     return (
       <RadioGroup
         style={{marginBottom: '20px'}}
-        defaultValue={this.props.filter}
+        value={this.props.filter}
         onChange={this.handleSelect}
       >
         {
           Object.keys(FilterType).map(key => (
-            <RadioButton key={key} value={key}>{key}</RadioButton>
+            <RadioButton key={key} value={FilterType[key]}>{key}</RadioButton>
           ))
         }
       </RadioGroup>

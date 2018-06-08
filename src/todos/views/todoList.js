@@ -38,7 +38,6 @@ const selectVisibleTodos = (todos, filter) => {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
   return {
     todos: selectVisibleTodos(state.todos, state.filter)
   }
