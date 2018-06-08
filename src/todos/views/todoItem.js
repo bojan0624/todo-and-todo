@@ -7,7 +7,7 @@ const TodoItem = ({onToggle, id, onRemove, completed, text}) => {
   return (
     <List.Item
       actions={
-        <a onClick={onRemove}>remove</a>
+        [<a onClick={onRemove}>remove</a>]
       }
     >
       <Checkbox checked={completed} onClick={() => {onToggle(id)}}/>

@@ -24,7 +24,7 @@ const TodoList = ({todos, onToggleTodo, onRemoveTodo}) => {
     )
 }
 
-const selectVisibleTodos = (todos, filter = FilterType.ALL) => {
+const selectVisibleTodos = (todos, filter) => {
   switch (filter) {
     case FilterType.ALL:
       return todos

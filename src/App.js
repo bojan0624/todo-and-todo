@@ -1,14 +1,20 @@
-import React, { Component, Fragment } from 'react';
-import { view as Todos } from './todos';
-import './App.css';
+import React, { Component } from 'react'
+import { view as Todos } from './todos'
+import { view as Filters } from './filter'
+import {Card} from 'antd'
+import './App.css'
 class App extends Component {
   render() {
     return (
-      <Fragment>
+      <Card
+        title="Todo List"
+        className={'todoapp'}
+      >
+        <Filters />
         <Todos />
-      </Fragment>
-    );
+      </Card>
+    )
   }
 }
 
-export default App;
+export default App
