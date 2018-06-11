@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO } from './actionTypes'
+import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, ADD_TODO_TAG } from './actionTypes'
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -24,6 +24,9 @@ export default (state = [], action) => {
     case REMOVE_TODO:
       return state.filter(item => item.id !== action.id)
      
+    case ADD_TODO_TAG:
+      return state.map(item => item.id === action.id ? {...item, typeId: action.typeId} : item)
+
     default:
       return state
   }

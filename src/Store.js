@@ -1,12 +1,14 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
 import { reducer as todoReducer } from './todos/'
 import { reducer as filterReducer } from './filter'
+import { reducer as tagReducer } from './tags'
 
 const win = window
 
 const reducer = combineReducers({
   todos: todoReducer,
-  filter: filterReducer
+  filter: filterReducer,
+  tagTypes: tagReducer
 })
 
 const middlewares = []

@@ -2,10 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { List } from 'antd'
 import TodoItem from './todoItem'
-import { toggleTodo, removeTodo } from '../actions'
 import { selectVisibleTodos } from '../selector'
 
-const TodoList = ({todos, onToggleTodo, onRemoveTodo}) => {
+const TodoList = ({todos}) => {
     return (
       <List>
         {
@@ -15,8 +14,7 @@ const TodoList = ({todos, onToggleTodo, onRemoveTodo}) => {
               id={item.id}
               text={item.text}
               completed={item.completed}
-              onToggle={() => onToggleTodo(item.id)}
-              onRemove={() => onRemoveTodo(item.id)}
+              typeId={item.typeId}
             />
           ))
         }
@@ -30,15 +28,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onToggle: id => {
-      dispatch(toggleTodo(id))
-    },
-    onRemoveTodo: id => {
-      dispatch(removeTodo(id))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default connect(mapStateToProps)(TodoList)
