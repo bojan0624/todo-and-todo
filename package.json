@@ -5,8 +5,11 @@
   "dependencies": {
     "antd": "^3.5.4",
     "eslint-plugin-import": "^2.12.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.0",
     "lodash": "^4.17.10",
     "lowdb": "^1.0.0",
+    "prettier": "^1.13.5",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
@@ -17,6 +20,7 @@
     "reselect": "^3.0.1"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom"
@@ -30,5 +34,11 @@
     "react-app-rewired": "^1.5.2",
     "react-test-renderer": "^16.4.0",
     "redux-immutable-state-invariant": "^2.1.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css,less}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   }
 }
