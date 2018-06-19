@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { List, Checkbox, Tag, Icon, Dropdown, Menu } from 'antd'
-import { toggleTodo, removeTodo, addTodoTag } from '../actions'
+import { toggleTodo, removeTodo, changeTag } from '../actions'
 
-const TodoItem = ({onToggle, id, onRemove, onAddTag, completed, text, typeId, tagTypes, getColorByType}) => {
+const TodoItem = ({onToggle, id, onRemove, onChangeTag, completed, text, typeId, tagTypes, getColorByType}) => {
   return (
     <List.Item
       actions={
@@ -14,14 +14,14 @@ const TodoItem = ({onToggle, id, onRemove, onAddTag, completed, text, typeId, ta
               <Menu>
                 {tagTypes.map(item => (
                   <Menu.Item key={item.id}
-                    onClick={() => {onAddTag(id, item.id)}}
+                    onClick={() => {onChangeTag(id, item.id)}}
                   >
                     <Tag style={{width: '90px'}} color={item.color}
                     >{item.name}</Tag>
                   </Menu.Item>
                 ))}
                 <Menu.Item
-                  onClick={() => {onAddTag(id)}}
+                  onClick={() => {onChangeTag(id)}}
                 >
                   delete
                 </Menu.Item>
@@ -55,8 +55,8 @@ const mapDispatchToProps = dispatch => {
     onRemove: id => {
       dispatch(removeTodo(id))
     },
-    onAddTag: (id, typeId) => {
-      dispatch(addTodoTag(id, typeId))
+    onChangeTag: (id, typeId) => {
+      dispatch(changeTag(id, typeId))
     },
     getColorByType: (types, typeId) => {
       const type = types.filter(item => item.id === typeId)[0]

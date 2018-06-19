@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, ADD_TODO_TAG } from './actionTypes'
+import { ADD_TODO, TOGGLE_TODO, REMOVE_TODO, CHANGE_TODO_TAG } from './actionTypes'
 
 let nextTodoId = 0;
 
@@ -19,8 +19,8 @@ export const removeTodo = id => ({
   id: id
 })
 
-export const addTodoTag = (id, typeId) => ({
-  type: ADD_TODO_TAG,
+export const changeTag = (id, typeId) => ({
+  type: CHANGE_TODO_TAG,
   id: id,
   typeId: typeId
 })
