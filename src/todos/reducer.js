@@ -26,7 +26,11 @@ export default (state = [], action) => {
      
     case CHANGE_TODO_TAG:
       return state.map(item => item.id === action.id ? {...item, typeId: action.typeId} : item)
-                  .sort((a, b) => a.typeId > b.typeId)
+                  .sort((a, b) => {
+                    const compareA = a.typeId || 9999
+                    const compareB = b.typeId || 9999
+                    return compareA > compareB
+                  })
     default:
       return state
   }

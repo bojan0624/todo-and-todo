@@ -8,7 +8,7 @@ const TodoItem = ({onToggle, id, onRemove, onChangeTag, completed, text, typeId,
     <List.Item
       actions={
         [
-          <a onClick={onRemove}>remove</a>,
+          <a onClick={() => onRemove(id)}>remove</a>,
           <Dropdown
             overlay={
               <Menu>
