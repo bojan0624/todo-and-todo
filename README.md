@@ -1266,48 +1266,48 @@ Then, on the server, you can replace `__SERVER_DATA__` with a JSON of real data 
 
 ## Running Tests
 
->Note: this feature is available with `react-scripts@0.3.0` and higher.<br>
->[Read the migration guide to learn how to enable it in older projects!](https://github.com/facebookincubator/create-react-app/blob/master/CHANGELOG.md#migrating-from-023-to-030)
+>注释: 这个特性需要 `react-scripts@0.3.0` 或以上版本支持.<br>
+>[阅读项目迁移指南，学习如何在旧项目中使用它!](https://github.com/facebookincubator/create-react-app/blob/master/CHANGELOG.md#migrating-from-023-to-030)
 
-Create React App uses [Jest](https://facebook.github.io/jest/) as its test runner. To prepare for this integration, we did a [major revamp](https://facebook.github.io/jest/blog/2016/09/01/jest-15.html) of Jest so if you heard bad things about it years ago, give it another try.
+Create React App 使用 [Jest](https://facebook.github.io/jest/) 作为测试工具. To prepare for this integration, 我们队 Jest 做了一个[重要的改进](https://facebook.github.io/jest/blog/2016/09/01/jest-15.html)，如果你在前几年听过一些它的缺点，现在不妨再试试。
 
-Jest is a Node-based runner. This means that the tests always run in a Node environment and not in a real browser. This lets us enable fast iteration speed and prevent flakiness.
+Jest 是一个基于Node的程序。 也就是说，测试是在Node环境中运行，而不是在真实的浏览器中。 这让我们可以快速的迭代代码。
 
-While Jest provides browser globals such as `window` thanks to [jsdom](https://github.com/tmpvar/jsdom), they are only approximations of the real browser behavior. Jest is intended to be used for unit tests of your logic and your components rather than the DOM quirks.
+虽然 Jest 使用 [jsdom](https://github.com/tmpvar/jsdom) 为我们提供了浏览器全局变量，例如 `window`, 但它们仅仅是接近真实浏览器的行为，两者并不相同。 Jest 的目的是用作你的代码逻辑和组件的单元测试，而不是用来测试 DOM 在浏览器中的怪异表现。
 
-We recommend that you use a separate tool for browser end-to-end tests if you need them. They are beyond the scope of Create React App.
+如果你需要测试真实浏览器中的表现，我们建议你单独使用端到端测试工具。这不在 Create React App 的功能范围内。
 
-### Filename Conventions
+### 文件名约定
 
-Jest will look for test files with any of the following popular naming conventions:
+Jest 将在下列约定中寻找测试文件:
 
-* Files with `.js` suffix in `__tests__` folders.
-* Files with `.test.js` suffix.
-* Files with `.spec.js` suffix.
+* 在 `__tests__` 目录中，后缀是 `.js` 的文件
+* 后缀是 `.test.js` 的文件
+* 后缀是 `.spec.js` 的文件
 
-The `.test.js` / `.spec.js` files (or the `__tests__` folders) can be located at any depth under the `src` top level folder.
+在顶级目录 `src` 中，后缀是 `.test.js` / `.spec.js` 的文件 (或 `__tests__` 目录)能在任何层级深度中被定位到。
 
-We recommend to put the test files (or `__tests__` folders) next to the code they are testing so that relative imports appear shorter. For example, if `App.test.js` and `App.js` are in the same folder, the test just needs to `import App from './App'` instead of a long relative path. Colocation also helps find tests more quickly in larger projects.
+我们推荐将测试文件(或 `__tests__` 目录)放在被测试的代码文件同级目录下，这样导入文件的相对路径会比较短。举个例子，如果 `App.test.js` 和 `App.js` 在同一目录下，测试文件中只需要写 `import App from './App'` 而不是一段很长的相对路径。
+Colocation 在能让大型项目中的测试文件被更快速的找到。
 
-### Command Line Interface
+### 命令行界面
 
-When you run `npm test`, Jest will launch in the watch mode. Every time you save a file, it will re-run the tests, just like `npm start` recompiles the code.
+挡你执行 `npm test`, Jest 将开启观察模式. 任何时候你保存文件, 它都会重新执行相关的测试文件, 就像 `npm start` 重新编译代码一样。
 
-The watcher includes an interactive command-line interface with the ability to run all tests, or focus on a search pattern. It is designed this way so that you can keep it open and enjoy fast re-runs. You can learn the commands from the “Watch Usage” note that the watcher prints after every run:
+这个观察者包含一个交互式的命令行界面，可以执行所有测试文件或者专注于一个搜索模式。这样设计可以让你一直开着它并享受快速重新执行测试的能力。你可以从 "Watch usage" 学习如何使用指令。观察者在每个测试执行后都会打印相关信息：
 
-![Jest watch mode](http://facebook.github.io/jest/img/blog/15-watch.gif)
+### 版本控制集成
 
-### Version Control Integration
+默认情况下, 当你运行 `npm test`, Jest 将只会运行那些上次commit后发生修改的文件相关的测试。不管你你有多少个测试，都能是执行的很快。注意，请经常commit你的代码，否则 Jest 无法有效地忽略那些没有改变的文件相关的测试。
 
-By default, when you run `npm test`, Jest will only run the tests related to files changed since the last commit. This is an optimization designed to make your tests run fast regardless of how many tests you have. However it assumes that you don’t often commit the code that doesn’t pass the tests.
+如果你想强制让 Jest 运行所有测试，你可以在观察模式下按 `a`。
 
-Jest will always explicitly mention that it only ran tests related to the files changed since the last commit. You can also press `a` in the watch mode to force Jest to run all tests.
+如果你的项目不是 Git 或 Mercurial 仓库，或者 `npm test` 是在 [持续集成](#continuous-integration) 服务中被执行，Jest将始终运行所有测试。
 
-Jest will always run all tests on a [continuous integration](#continuous-integration) server or if the project is not inside a Git or Mercurial repository.
+### 编写测试
 
-### Writing Tests
-
-To create tests, add `it()` (or `test()`) blocks with the name of the test and its code. You may optionally wrap them in `describe()` blocks for logical grouping but this is neither required nor recommended.
+创建测试文件, 添加代码 `it()` (或 `test()`) ，并为这个测试起个名字、添加相应的代码。 
+如果你想对测试进行分组，你也可以将他们放在 `describe()` 里，但这不是必须的，也并不推荐这样做。
 
 Jest provides a built-in `expect()` global function for making assertions. A basic test could look like this:
 
@@ -1319,13 +1319,13 @@ it('sums numbers', () => {
   expect(sum(2, 2)).toEqual(4);
 });
 ```
-
+`expect()` 匹配器(matchers) 由 Jest 提供。 [查看更详细的文档](https://facebook.github.io/jest/docs/en/expect.html#content)<br>
 All `expect()` matchers supported by Jest are [extensively documented here](https://facebook.github.io/jest/docs/en/expect.html#content).<br>
-You can also use [`jest.fn()` and `expect(fn).toBeCalled()`](https://facebook.github.io/jest/docs/en/expect.html#tohavebeencalled) to create “spies” or mock functions.
+你也可以使用 [`jest.fn()` and `expect(fn).toBeCalled()`](https://facebook.github.io/jest/docs/en/expect.html#tohavebeencalled) 创建 “spies” 或 mock functions.
 
-### Testing Components
+### 测试组件
 
-There is a broad spectrum of component testing techniques. They range from a “smoke test” verifying that a component renders without throwing, to shallow rendering and testing some of the output, to full rendering and testing component lifecycle and state changes.
+组件测试技术的范围很广. 从验证组件能否渲染的“冒烟测试”, to shallow rendering and testing some of the output, to full rendering and testing component lifecycle and state changes.
 
 Different projects choose different testing tradeoffs based on how often components change, and how much logic they contain. If you haven’t decided on a testing strategy yet, we recommend that you start with creating simple smoke tests for your components:
 
