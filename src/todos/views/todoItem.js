@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { List, Checkbox, Tag, Icon, Dropdown, Menu } from 'antd';
 import { toggleTodo, removeTodo, changeTag } from '../actions';
+import { ColorTag } from '../../tags';
 
 const TodoItem = ({
   onToggle,
@@ -12,7 +13,7 @@ const TodoItem = ({
   text,
   typeId,
   tagTypes,
-  getColorByType
+  getLevelByType
 }) => {
   return (
     <List.Item
@@ -28,9 +29,12 @@ const TodoItem = ({
                     onChangeTag(id, item.id);
                   }}
                 >
-                  <Tag style={{ width: '90px' }} color={item.color}>
-                    {item.name}
-                  </Tag>
+                  <ColorTag
+                    style={{ width: '90px', marginRight: '0' }}
+                    level={item.level}
+                  >
+                    <a style={{ color: 'white' }}>{item.name}</a>
+                  </ColorTag>
                 </Menu.Item>
               ))}
               <Menu.Item
@@ -62,12 +66,7 @@ const TodoItem = ({
       >
         {text}
       </div>
-      {typeId && (
-        <Tag
-          style={{ width: '20px', height: '20px' }}
-          color={getColorByType(tagTypes, typeId)}
-        />
-      )}
+      {typeId && <ColorTag level={getLevelByType(tagTypes, typeId)} />}
     </List.Item>
   );
 };
@@ -89,9 +88,9 @@ const mapDispatchToProps = dispatch => {
     onChangeTag: (id, typeId) => {
       dispatch(changeTag(id, typeId));
     },
-    getColorByType: (types, typeId) => {
+    getLevelByType: (types, typeId) => {
       const type = types.filter(item => item.id === typeId)[0];
-      return type.color;
+      return type.level;
     }
   };
 };

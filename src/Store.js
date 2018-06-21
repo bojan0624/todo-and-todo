@@ -5,13 +5,15 @@ import storage from 'redux-persist/lib/storage';
 import { reducer as todoReducer } from './todos/';
 import { reducer as filterReducer } from './filter';
 import { reducer as tagReducer } from './tags';
+import { TagTypes } from './constants';
 
 const win = window;
 
 const reducer = combineReducers({
   todos: todoReducer,
   filter: filterReducer,
-  tagTypes: tagReducer
+  tagTypes: () => TagTypes,
+  subjectColor: tagReducer
 });
 
 const middlewares = [];

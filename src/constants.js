@@ -2,22 +2,33 @@ export const FilterType = {
   ALL: 'all',
   COMPLETED: 'completed',
   UNCOMPLETED: 'uncompleted'
-}
+};
 
 export const TagTypes = [
   {
     id: 1,
     name: 'urgent',
-    color: '#08979c'
+    level: 8
   },
   {
     id: 2,
     name: 'important',
-    color: '#5cdbd3'
+    level: 6
   },
   {
     id: 3,
     name: 'general',
-    color: '#b5f5ec'
+    level: 4
   }
-]
+];
+
+export const SubjectColors = [
+  'blue',
+  'purple',
+  'cyan',
+  'green',
+  'magenta',
+  'red',
+  'orange',
+  'yellow'
+];

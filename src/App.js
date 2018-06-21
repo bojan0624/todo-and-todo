@@ -1,20 +1,46 @@
-import React, { Component } from 'react'
-import { view as Todos } from './todos'
-import { view as Filters } from './filter'
-import {Card} from 'antd'
-import './App.css'
+import React, { Component, Fragment } from 'react';
+import { view as Todos } from './todos';
+import { view as Filters } from './filter';
+import { view as Tags } from './tags';
+import { Card, Icon, Popover } from 'antd';
+import './App.css';
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showSettingView: false
+    };
+  }
+
+  handleSetting = () => this.setState({ showSettingView: true });
+
   render() {
     return (
-      <Card
-        title="Todo List"
-        className={'todoapp'}
-      >
-        <Filters />
-        <Todos />
-      </Card>
-    )
+      <Fragment>
+        <Card
+          title="Todo List"
+          className={'todoapp'}
+          extra={
+            <Popover
+              placement="rightBottom"
+              title={'setting'}
+              content={
+                <div style={{ maxWidth: '170px' }}>
+                  <Tags />
+                </div>
+              }
+              trigger="click"
+            >
+              <Icon type="setting" onClick={this.handleSetting} />
+            </Popover>
+          }
+        >
+          <Filters />
+          <Todos />
+        </Card>
+      </Fragment>
+    );
   }
 }
 
-export default App
+export default App;
