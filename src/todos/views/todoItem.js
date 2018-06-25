@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { List, Checkbox, Tag, Icon, Dropdown, Menu } from 'antd';
+import { List, Checkbox, Icon, Dropdown, Menu } from 'antd';
 import { toggleTodo, removeTodo, changeTag } from '../actions';
 import { ColorTag } from '../../tags';
 
