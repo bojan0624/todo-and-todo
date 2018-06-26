@@ -17,6 +17,7 @@
     "react-flip-move": "^3.0.2",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
+    "react-transition-group": "^2.3.1",
     "redux": "^4.0.0",
     "redux-persist": "^5.10.0",
     "reselect": "^3.0.1"
@@ -25,9 +26,10 @@
     "precommit": "lint-staged",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom"
+    "test": "react-app-rewired test"
   },
   "devDependencies": {
+    "babel-jest": "^23.0.1",
     "babel-plugin-import": "^1.7.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -35,6 +37,7 @@
     "react-app-rewire-less": "^2.1.1",
     "react-app-rewired": "^1.5.2",
     "react-test-renderer": "^16.4.0",
+    "redux-devtools-extension": "^2.13.5",
     "redux-immutable-state-invariant": "^2.1.0"
   },
   "lint-staged": {
@@ -42,5 +45,19 @@
       "prettier --single-quote --write",
       "git add"
     ]
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      ".*\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
   }
 }
